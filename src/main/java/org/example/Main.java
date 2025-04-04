@@ -7,9 +7,13 @@ import org.example.items.Treasure;
 import org.example.items.Weapon;
 import org.example.items.enums.TreasureEnum;
 import org.example.items.enums.WeaponEnum;
+import org.example.pathway.Pathway;
 import org.example.rooms.Room;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
@@ -49,5 +53,38 @@ public class Main {
         room5.getCharacterList().add(medusa);
         room6.getCharacterList().add(mrDracula);
         room9.getCharacterList().add(princess);
+
+        Map<Room,Room> map12 = new HashMap<>();
+        map12.put(room1,room3);
+        Pathway path12 = new Pathway(true, map12);
+
+        Map<Room,Room> map14 = new HashMap<>();
+        map14.put(room1,room4);
+        Pathway path14 = new Pathway(true, map14);
+
+        Map<Room,Room> map23 = new HashMap<>();
+        map23.put(room2,room3);
+        Pathway path23 = new Pathway(true, map23);
+
+        Map<Room,Room> map25 = new HashMap<>();
+        map25.put(room2,room5);
+        Pathway path25 = new Pathway(true, map25);
+
+        Map<Room,Room> map56 = new HashMap<>();
+        map56.put(room5,room6);
+        Pathway path56 = new Pathway(true, map56);
+
+        Map<Room,Room> map69 = new HashMap<>();
+        map69.put(room6,room9);
+        Pathway path69 = new Pathway(false, map69);
+
+        Map<Room,Room> map58 = new HashMap<>();
+        map58.put(room5,room8);
+        Pathway path58 = new Pathway(false, map58);
+
+        Map<Room,Room> map78 = new HashMap<>();
+        map78.put(room7,room8);
+        Pathway path78 = new Pathway(true, map78);
+
     }
 }
