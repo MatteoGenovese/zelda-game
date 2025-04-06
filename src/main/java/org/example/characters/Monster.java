@@ -1,7 +1,6 @@
 package org.example.characters;
 
-import org.example.items.enums.WeaponEnum;
-import org.example.rooms.Room;
+import org.example.enums.WeaponEnum;
 
 public class Monster extends Character{
     private String superPower;

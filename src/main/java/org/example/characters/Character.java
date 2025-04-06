@@ -9,4 +9,12 @@ public class Character {
         this.name = name;
         this.isLiving = isLiving;
     }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "name='" + name + '\'' +
+                ", isLiving=" + isLiving +
+                '}';
+    }
 }

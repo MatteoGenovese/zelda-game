@@ -1,15 +1,18 @@
 package org.example.pathway;
 
+import org.example.enums.CoordinateEnum;
 import org.example.rooms.Room;
-
-import java.util.Map;
 
 public class Pathway {
     private Boolean isOpen;
-    private Map<Room,Room> linkedRooms;
+    private Room fromRoom;
+    private Room toRoom;
+    private CoordinateEnum coordinate;
 
-    public Pathway(Boolean isOpen, Map<Room, Room> linkedRooms) {
+    public Pathway(Boolean isOpen, Room fromRoom, Room toRoom, CoordinateEnum coordinate) {
         this.isOpen = isOpen;
-        this.linkedRooms = linkedRooms;
+        this.fromRoom = fromRoom;
+        this.toRoom = toRoom;
+        this.coordinate = coordinate;
     }
 }

@@ -1,29 +1,32 @@
 package org.example;
 
+import org.example.characters.Character;
+import org.example.characters.Hero;
 import org.example.characters.Monster;
 import org.example.characters.Princess;
+import org.example.enums.CoordinateEnum;
 import org.example.items.Item;
 import org.example.items.Treasure;
 import org.example.items.Weapon;
-import org.example.items.enums.TreasureEnum;
-import org.example.items.enums.WeaponEnum;
+import org.example.enums.TreasureEnum;
+import org.example.enums.WeaponEnum;
 import org.example.pathway.Pathway;
 import org.example.rooms.Room;
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.InputStream;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
         startNewGame();
-
-
     }
 
     private static void startNewGame() {
+
+        List<Room> roomList = new ArrayList<>();
+        List<Character> characterList = new ArrayList<>();
+
         Monster medusa = new Monster("Medusa", true, "congelamento", WeaponEnum.MAGIC_SHIELD );
         Monster mrDracula = new Monster("Dracula", true, "succhiasangue", WeaponEnum.SILVER_DUGGER);
         Princess princess = new Princess("Gabriella", true, false);
@@ -34,57 +37,157 @@ public class Main {
         Item magicShield = new Weapon(WeaponEnum.MAGIC_SHIELD.getName(), "", false,"specchio riflesso");
         Item silverDugger = new Weapon(WeaponEnum.SILVER_DUGGER.getName(), "", false,"puntellino");
 
-        Room room1 = new Room(null, 1, "number 1", true, false, new ArrayList<>());
-        Room room2 = new Room(null, 2, "number 2", false, false, new ArrayList<>());
-        Room room3 = new Room(null, 3, "number 3", false, false, new ArrayList<>());
-        Room room4 = new Room(null, 4, "number 4", false, false, new ArrayList<>());
-        Room room5 = new Room(null, 5, "number 5", false, false, new ArrayList<>());
-        Room room6 = new Room(null, 6, "number 6", false, false, new ArrayList<>());
-        Room room7 = new Room(null, 7, "number 7", false, false, new ArrayList<>());
-        Room room8 = new Room(null, 8, "number 8", false, true, new ArrayList<>());
-        Room room9 = new Room(null, 9, "number 9", false, true,new ArrayList<>());
+        roomList.add(new Room(1, "number 1", true, false));
+        roomList.add(new Room(2, "number 2", false, false));
+        roomList.add(new Room(3, "number 3", false, false));
+        roomList.add(new Room(4, "number 4", false, false));
+        roomList.add(new Room(5, "number 5", false, false));
+        roomList.add(new Room(6, "number 6", false, false));
+        roomList.add(new Room(7, "number 7", false, false));
+        roomList.add(new Room(8, "number 8", false, true));
+        roomList.add(new Room(9, "number 9", false, true));
 
-        room2.setItem(goldenEgg);
-        room3.setItem(magicShield);
-        room4.setItem(goldenChalice);
-        room7.setItem(silverDugger);
-        room8.setItem(pieceOfPaper);
+        roomList.get(2-1).setItem(goldenEgg);
+        roomList.get(3-1).setItem(magicShield);
+        roomList.get(4-1).setItem(goldenChalice);
+        roomList.get(7-1).setItem(silverDugger);
+        roomList.get(8-1).setItem(pieceOfPaper);
+        roomList.get(5-1).getCharacterList().add(medusa);
+        roomList.get(6-1).getCharacterList().add(mrDracula);
+        roomList.get(9-1).getCharacterList().add(princess);
 
-        room5.getCharacterList().add(medusa);
-        room6.getCharacterList().add(mrDracula);
-        room9.getCharacterList().add(princess);
+        Pathway path12 = new Pathway(true, roomList.get(1-1), roomList.get(3-1), CoordinateEnum.EAST);
+        Pathway path21 = new Pathway(true, roomList.get(3-1), roomList.get(1-1), CoordinateEnum.WEST);
 
-        Map<Room,Room> map12 = new HashMap<>();
-        map12.put(room1,room3);
-        Pathway path12 = new Pathway(true, map12);
+        Pathway path14 = new Pathway(true, roomList.get(1-1), roomList.get(4-1), CoordinateEnum.SOUTH);
+        Pathway path41 = new Pathway(true, roomList.get(4-1), roomList.get(1-1), CoordinateEnum.NORTH);
 
-        Map<Room,Room> map14 = new HashMap<>();
-        map14.put(room1,room4);
-        Pathway path14 = new Pathway(true, map14);
+        Pathway path23 = new Pathway(true, roomList.get(2-1), roomList.get(3-1), CoordinateEnum.EAST);
+        Pathway path32 = new Pathway(true, roomList.get(3-1), roomList.get(2-1), CoordinateEnum.WEST);
 
-        Map<Room,Room> map23 = new HashMap<>();
-        map23.put(room2,room3);
-        Pathway path23 = new Pathway(true, map23);
+        Pathway path25 = new Pathway(true, roomList.get(2-1), roomList.get(5-1), CoordinateEnum.SOUTH);
+        Pathway path52 = new Pathway(true, roomList.get(5-1), roomList.get(2-1), CoordinateEnum.NORTH);
 
-        Map<Room,Room> map25 = new HashMap<>();
-        map25.put(room2,room5);
-        Pathway path25 = new Pathway(true, map25);
+        Pathway path56 = new Pathway(true, roomList.get(5-1), roomList.get(6-1), CoordinateEnum.EAST);
+        Pathway path65 = new Pathway(true, roomList.get(6-1), roomList.get(5-1), CoordinateEnum.WEST);
 
-        Map<Room,Room> map56 = new HashMap<>();
-        map56.put(room5,room6);
-        Pathway path56 = new Pathway(true, map56);
+        Pathway path69 = new Pathway(false, roomList.get(6-1), roomList.get(9-1), CoordinateEnum.SOUTH);
+        Pathway path96 = new Pathway(false, roomList.get(9-1), roomList.get(6-1), CoordinateEnum.NORTH);
 
-        Map<Room,Room> map69 = new HashMap<>();
-        map69.put(room6,room9);
-        Pathway path69 = new Pathway(false, map69);
+        Pathway path58 = new Pathway(false, roomList.get(5-1), roomList.get(8-1), CoordinateEnum.SOUTH);
+        Pathway path85 = new Pathway(false, roomList.get(8-1), roomList.get(5-1), CoordinateEnum.NORTH);
 
-        Map<Room,Room> map58 = new HashMap<>();
-        map58.put(room5,room8);
-        Pathway path58 = new Pathway(false, map58);
+        Pathway path78 = new Pathway(true, roomList.get(7-1), roomList.get(8-1), CoordinateEnum.EAST);
+        Pathway path87 = new Pathway(true, roomList.get(8-1), roomList.get(7-1), CoordinateEnum.WEST);
 
-        Map<Room,Room> map78 = new HashMap<>();
-        map78.put(room7,room8);
-        Pathway path78 = new Pathway(true, map78);
+        List<Pathway> room1Pathways = new ArrayList<>();
+        room1Pathways.add(path12);
+        room1Pathways.add(path14);
+        roomList.get(1-1).setPathwayList(room1Pathways);
 
+
+        List<Pathway> room2Pathways = new ArrayList<>();
+        room2Pathways.add(path21);
+        room2Pathways.add(path25);
+        room2Pathways.add(path23);
+        roomList.get(2-1).setPathwayList(room2Pathways);
+
+
+        List<Pathway> room3Pathways = new ArrayList<>();
+        room3Pathways.add(path32);
+        roomList.get(3-1).setPathwayList(room3Pathways);
+
+
+        List<Pathway> room4Pathways = new ArrayList<>();
+        room4Pathways.add(path41);
+        roomList.get(4-1).setPathwayList(room4Pathways);
+
+        List<Pathway> room5Pathways = new ArrayList<>();
+        room5Pathways.add(path52);
+        room5Pathways.add(path56);
+        room5Pathways.add(path58);
+        roomList.get(5-1).setPathwayList(room5Pathways);
+
+        List<Pathway> room6Pathways = new ArrayList<>();
+        room6Pathways.add(path69);
+        room6Pathways.add(path65);
+        roomList.get(6-1).setPathwayList(room6Pathways);
+
+        List<Pathway> room7Pathways = new ArrayList<>();
+        room7Pathways.add(path78);
+        roomList.get(7-1).setPathwayList(room7Pathways);
+
+        List<Pathway> room8Pathways = new ArrayList<>();
+        room8Pathways.add(path85);
+        room8Pathways.add(path87);
+        roomList.get(8-1).setPathwayList(room8Pathways);
+
+        List<Pathway> room9Pathways = new ArrayList<>();
+        room9Pathways.add(path96);
+        roomList.get(9-1).setPathwayList(room9Pathways);
+
+        Hero hero = new Hero(scannHeroName(), true, new ArrayList<>());
+
+        roomList.get(1-1).getCharacterList().add(hero);
+
+
+        characterList.add(medusa);
+        characterList.add(hero);
+        characterList.add(mrDracula);
+        characterList.add(princess);
+
+        readStartFile();
+        startTheGame( roomList, characterList);
+
+    }
+
+    private static void startTheGame(List<Room> roomList, List<Character> characterList) {
+        while (true){
+            currentPosition(roomList, characterList);
+            System.out.println("come vuoi procedere");
+        }
+    }
+
+    private static void currentPosition(List<Room> roomList, List<Character> characterList) {
+
+            System.out.println("come vuoi procedere");
+    }
+
+
+    private static String scannHeroName() {
+
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            try {
+                System.out.print("Inserisci il tuo nome: ");
+                String name =  "";
+                name = scanner.nextLine();
+                if (!name.isEmpty()){
+                    scanner.close();
+                    return name;
+                }
+            }catch (Error e){
+                System.out.println("error occurred");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private static void readStartFile() {
+        InputStream input = Main.class.getClassLoader().getResourceAsStream("Start.txt");
+        if (input == null) {
+            System.out.println("File not found");
+            return;
+        }
+
+        try (Scanner myReader = new Scanner(input)) {
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+            }
+        } catch (Exception e) {
+            System.out.println("An error occurred while reading the file.");
+            e.printStackTrace();
+        }
     }
 }
