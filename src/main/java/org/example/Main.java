@@ -1,21 +1,9 @@
 package org.example;
 
-import org.example.characters.Character;
-import org.example.characters.Hero;
-import org.example.characters.Monster;
-import org.example.characters.Princess;
-import org.example.enums.CoordinateEnum;
 import org.example.game.ActionHandler;
+import org.example.game.Game;
 import org.example.game.GameHandler;
-import org.example.items.Item;
-import org.example.items.Treasure;
-import org.example.items.Weapon;
-import org.example.enums.TreasureEnum;
-import org.example.enums.WeaponEnum;
-import org.example.pathway.Pathway;
-import org.example.rooms.Room;
 
-import java.io.InputStream;
 import java.util.*;
 
 public class Main {
@@ -28,8 +16,9 @@ public class Main {
         gameHandler.useScanner(scanner);
         actionHandler.useScanner(scanner);
 
-        gameHandler.startNewGame();
+        Game game = gameHandler.prepareNewGame();
         actionHandler.action();
         scanner.close();
+
     }
 }

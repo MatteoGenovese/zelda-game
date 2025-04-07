@@ -1,7 +1,6 @@
 package org.example.game;
 
 import org.example.Main;
-import org.example.characters.Character;
 import org.example.characters.Hero;
 import org.example.characters.Monster;
 import org.example.characters.Princess;
@@ -74,7 +73,7 @@ public class GameHandler {
     }
 
 
-    public void startNewGame() {
+    public Game prepareNewGame() {
 
         List<Room> roomList = new ArrayList<>();
         List<org.example.characters.Character> characterList = new ArrayList<>();
@@ -88,6 +87,14 @@ public class GameHandler {
         Item pieceOfPaper = new Treasure(TreasureEnum.PIECE_OF_PAPER.getName(), "" ,true,1000);
         Item magicShield = new Weapon(WeaponEnum.MAGIC_SHIELD.getName(), "", false,"specchio riflesso");
         Item silverDugger = new Weapon(WeaponEnum.SILVER_DUGGER.getName(), "", false,"puntellino");
+
+        List<Item> itemList = new ArrayList<>();
+        itemList.add(goldenEgg);
+        itemList.add(goldenChalice);
+        itemList.add(pieceOfPaper);
+        itemList.add(magicShield);
+        itemList.add(silverDugger);
+
 
         roomList.add(new Room(1, "number 1", true, false));
         roomList.add(new Room(2, "number 2", false, false));
@@ -188,8 +195,12 @@ public class GameHandler {
         characterList.add(mrDracula);
         characterList.add(princess);
 
-        readStartFile();
+
+        return new Game(roomList, characterList, itemList);
+
     }
+
+    //readStartFile();
 
 
 }

@@ -22,11 +22,20 @@ public class ActionHandler {
         this.scanner = scanner;
     }
 
-    public void action() {
+    public void startGame(){
+       Boolean gameOn = true;
+       while (gameOn){
+           gameOn = action();
+       }
+    }
 
-        while (true) {
+    public Boolean action() {
+
+        boolean gameOn = true;
+
+        while (gameOn) {
             try {
-                System.out.println("Insert the action (MOVE, PICK, DROP, EXIT, ATTACK, LOOK):");
+                System.out.println("Insert the action (MOVE, PICK, DROP, EXIT, ATTACK, LOOK or QUIT to left the game):");
 
                 if (!scanner.hasNextLine()) {
                     System.out.println("No line found");
@@ -40,22 +49,29 @@ public class ActionHandler {
                     continue;
                 }
 
-                switch (action) {
-                    case "move":
-                    case "pick":
-                    case "drop":
-                    case "attack":
-                    case "look":
+                gameOn = switch (action) {
+                    case "move", "pick", "drop", "exit", "attack", "look" -> {
                         System.out.println("You choose: " + action.toUpperCase());
-                        return;
-                    default:
+                        yield true;
+                    }
+                    case "quit" -> {
+                        System.out.println("You quit the game: " + action.toUpperCase());
+                        yield false;
+                    }
+                    default -> {
                         System.out.println("Not a valid action: " + action);
-                }
+                        yield true;
+                    }
+                };
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
                 e.printStackTrace();
+                return true;
             }
+
         }
+
+        return gameOn;
     }
 
 
