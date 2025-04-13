@@ -17,7 +17,7 @@ public class Main {
         actionHandler.useScanner(scanner);
 
         Game game = gameHandler.prepareNewGame();
-        actionHandler.action();
+        actionHandler.startGame(game);
         scanner.close();
 
     }

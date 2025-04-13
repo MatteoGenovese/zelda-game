@@ -1,6 +1,7 @@
 package org.example.characters;
 
 import org.example.items.Item;
+import org.example.rooms.Room;
 
 import java.util.List;
 
@@ -9,8 +10,8 @@ public class Hero extends Character {
     //can contain max 10 items
     private List<Item> bag;
 
-    public Hero(String name, Boolean isLiving, List<Item> bag) {
-        super(name, isLiving);
+    public Hero(String name, Boolean isLiving, Room withinRoom, List<Item> bag) {
+        super(name, isLiving, withinRoom);
         this.bag = bag;
     }
 

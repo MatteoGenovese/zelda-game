@@ -2,6 +2,8 @@ package org.example.game;
 
 import org.example.enums.CommandEnum;
 
+import java.lang.reflect.Array;
+import java.util.List;
 import java.util.Scanner;
 
 public class ActionHandler {
@@ -22,14 +24,14 @@ public class ActionHandler {
         this.scanner = scanner;
     }
 
-    public void startGame(){
+    public void startGame(Game game){
        Boolean gameOn = true;
        while (gameOn){
-           gameOn = action();
+           gameOn = action(game);
        }
     }
 
-    public Boolean action() {
+    public Boolean action(Game game) {
 
         boolean gameOn = true;
 
@@ -42,20 +44,26 @@ public class ActionHandler {
                     break;
                 }
 
-                String action = scanner.nextLine().trim().toLowerCase();
+                String command = scanner.nextLine().trim().toLowerCase();
+                List<String> action = List.of(command.split(" "));
 
-                if (action.isEmpty()) {
+                if (action.getFirst().isEmpty()) {
                     System.out.println("You didn't insert anything");
                     continue;
                 }
 
-                gameOn = switch (action) {
-                    case "move", "pick", "drop", "exit", "attack", "look" -> {
-                        System.out.println("You choose: " + action.toUpperCase());
+                gameOn = switch (action.getFirst()) {
+                    case "pick", "drop", "exit", "attack", "look" -> {
+                        System.out.println("You choose: " + action.getFirst().toUpperCase());
+                        yield true;
+                    }
+                    case "move"-> {
+                        MoveHandler moveHandler = MoveHandler.getInstance();
+                        moveHandler.moveHero(game, action.getLast());
                         yield true;
                     }
                     case "quit" -> {
-                        System.out.println("You quit the game: " + action.toUpperCase());
+                        System.out.println("You quit the game: " + action.getFirst().toUpperCase());
                         yield false;
                     }
                     default -> {
@@ -65,7 +73,6 @@ public class ActionHandler {
                 };
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
-                e.printStackTrace();
                 return true;
             }
 

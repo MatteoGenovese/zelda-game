@@ -3,7 +3,6 @@ package org.example.rooms;
 import org.example.characters.Character;
 import org.example.characters.Monster;
 import org.example.items.Item;
-import org.example.pathway.Pathway;
 
 import java.util.*;
 
@@ -12,34 +11,19 @@ public class Room {
     private String description;
     private Boolean hasExit;
     private Boolean hasToBeOpenedFromOutside;
-    private List<Pathway> pathwayList;
+    private Room northRoom;
+    private Room southRoom;
+    private Room eastRoom;
+    private Room westRoom;
 
     //optionals
     private Item item;
-    private List<Character> characterList;
 
     public Room(Integer number, String description, Boolean hasExit, Boolean hasToBeOpenedFromOutside) {
         this.number = number;
         this.description = description;
         this.hasExit = hasExit;
         this.hasToBeOpenedFromOutside = hasToBeOpenedFromOutside;
-        this.characterList = new ArrayList<>();
-    }
-
-    public List<Pathway> getPathwayList() {
-        return pathwayList;
-    }
-
-    public void setPathwayList(List<Pathway> pathwayList) {
-        this.pathwayList = pathwayList;
-    }
-
-    public List<Character> getCharacterList() {
-        return characterList;
-    }
-
-    public void setCharacterList(List<Character> characterList) {
-        this.characterList = characterList;
     }
 
     public Item getItem() {
@@ -53,4 +37,78 @@ public class Room {
     //Currently you are in Room 1. A cool shudder trickles down your spine. Glancing around nervously, you see somber portrait
     //s staring at you from behind layers of dust, seemingly penetrating your very being. The Exit to Castle is to your West.
 
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getHasExit() {
+        return hasExit;
+    }
+
+    public void setHasExit(Boolean hasExit) {
+        this.hasExit = hasExit;
+    }
+
+    public Boolean getHasToBeOpenedFromOutside() {
+        return hasToBeOpenedFromOutside;
+    }
+
+    public void setHasToBeOpenedFromOutside(Boolean hasToBeOpenedFromOutside) {
+        this.hasToBeOpenedFromOutside = hasToBeOpenedFromOutside;
+    }
+
+    public Room getNorthRoom() {
+        return northRoom;
+    }
+
+    public void setNorthRoom(Room northRoom) {
+        this.northRoom = northRoom;
+    }
+
+    public Room getSouthRoom() {
+        return southRoom;
+    }
+
+    public void setSouthRoom(Room southRoom) {
+        this.southRoom = southRoom;
+    }
+
+    public Room getEastRoom() {
+        return eastRoom;
+    }
+
+    public void setEastRoom(Room eastRoom) {
+        this.eastRoom = eastRoom;
+    }
+
+    public Room getWestRoom() {
+        return westRoom;
+    }
+
+    public void setWestRoom(Room westRoom) {
+        this.westRoom = westRoom;
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "number=" + number +
+                ", description='" + description + '\'' +
+                ", hasExit=" + hasExit +
+                ", hasToBeOpenedFromOutside=" + hasToBeOpenedFromOutside +
+                '}';
+    }
 }

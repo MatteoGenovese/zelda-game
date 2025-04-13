@@ -10,7 +10,6 @@ import org.example.enums.WeaponEnum;
 import org.example.items.Item;
 import org.example.items.Treasure;
 import org.example.items.Weapon;
-import org.example.pathway.Pathway;
 import org.example.rooms.Room;
 
 import java.io.InputStream;
@@ -76,11 +75,8 @@ public class GameHandler {
     public Game prepareNewGame() {
 
         List<Room> roomList = new ArrayList<>();
-        List<org.example.characters.Character> characterList = new ArrayList<>();
+        List<Monster> monsterList  = new ArrayList<>();
 
-        Monster medusa = new Monster("Medusa", true, "congelamento", WeaponEnum.MAGIC_SHIELD );
-        Monster mrDracula = new Monster("Dracula", true, "succhiasangue", WeaponEnum.SILVER_DUGGER);
-        Princess princess = new Princess("Gabriella", true, false);
 
         Item goldenEgg = new Treasure(TreasureEnum.GOLDEN_EGG.getName(), "" ,true,500);
         Item goldenChalice = new Treasure(TreasureEnum.GOLDEN_CHALICE.getName(), "" ,true,500);
@@ -97,13 +93,21 @@ public class GameHandler {
 
 
         roomList.add(new Room(1, "number 1", true, false));
+
         roomList.add(new Room(2, "number 2", false, false));
+
         roomList.add(new Room(3, "number 3", false, false));
+
         roomList.add(new Room(4, "number 4", false, false));
+
         roomList.add(new Room(5, "number 5", false, false));
+
         roomList.add(new Room(6, "number 6", false, false));
+
         roomList.add(new Room(7, "number 7", false, false));
+
         roomList.add(new Room(8, "number 8", false, true));
+
         roomList.add(new Room(9, "number 9", false, true));
 
         roomList.get(2-1).setItem(goldenEgg);
@@ -111,92 +115,47 @@ public class GameHandler {
         roomList.get(4-1).setItem(goldenChalice);
         roomList.get(7-1).setItem(silverDugger);
         roomList.get(8-1).setItem(pieceOfPaper);
-        roomList.get(5-1).getCharacterList().add(medusa);
-        roomList.get(6-1).getCharacterList().add(mrDracula);
-        roomList.get(9-1).getCharacterList().add(princess);
-
-        Pathway path12 = new Pathway(true, roomList.get(1-1), roomList.get(3-1), CoordinateEnum.EAST);
-        Pathway path21 = new Pathway(true, roomList.get(3-1), roomList.get(1-1), CoordinateEnum.WEST);
-
-        Pathway path14 = new Pathway(true, roomList.get(1-1), roomList.get(4-1), CoordinateEnum.SOUTH);
-        Pathway path41 = new Pathway(true, roomList.get(4-1), roomList.get(1-1), CoordinateEnum.NORTH);
-
-        Pathway path23 = new Pathway(true, roomList.get(2-1), roomList.get(3-1), CoordinateEnum.EAST);
-        Pathway path32 = new Pathway(true, roomList.get(3-1), roomList.get(2-1), CoordinateEnum.WEST);
-
-        Pathway path25 = new Pathway(true, roomList.get(2-1), roomList.get(5-1), CoordinateEnum.SOUTH);
-        Pathway path52 = new Pathway(true, roomList.get(5-1), roomList.get(2-1), CoordinateEnum.NORTH);
-
-        Pathway path56 = new Pathway(true, roomList.get(5-1), roomList.get(6-1), CoordinateEnum.EAST);
-        Pathway path65 = new Pathway(true, roomList.get(6-1), roomList.get(5-1), CoordinateEnum.WEST);
-
-        Pathway path69 = new Pathway(false, roomList.get(6-1), roomList.get(9-1), CoordinateEnum.SOUTH);
-        Pathway path96 = new Pathway(false, roomList.get(9-1), roomList.get(6-1), CoordinateEnum.NORTH);
-
-        Pathway path58 = new Pathway(false, roomList.get(5-1), roomList.get(8-1), CoordinateEnum.SOUTH);
-        Pathway path85 = new Pathway(false, roomList.get(8-1), roomList.get(5-1), CoordinateEnum.NORTH);
-
-        Pathway path78 = new Pathway(true, roomList.get(7-1), roomList.get(8-1), CoordinateEnum.EAST);
-        Pathway path87 = new Pathway(true, roomList.get(8-1), roomList.get(7-1), CoordinateEnum.WEST);
-
-        List<Pathway> room1Pathways = new ArrayList<>();
-        room1Pathways.add(path12);
-        room1Pathways.add(path14);
-        roomList.get(1-1).setPathwayList(room1Pathways);
 
 
-        List<Pathway> room2Pathways = new ArrayList<>();
-        room2Pathways.add(path21);
-        room2Pathways.add(path25);
-        room2Pathways.add(path23);
-        roomList.get(2-1).setPathwayList(room2Pathways);
+
+        roomList.get(1-1).setWestRoom(roomList.get(2-1));
+        roomList.get(1-1).setSouthRoom(roomList.get(4-1));
 
 
-        List<Pathway> room3Pathways = new ArrayList<>();
-        room3Pathways.add(path32);
-        roomList.get(3-1).setPathwayList(room3Pathways);
+        roomList.get(2-1).setEastRoom(roomList.get(1-1));
+        roomList.get(2-1).setWestRoom(roomList.get(3-1));
+        roomList.get(2-1).setSouthRoom(roomList.get(5-1));
+
+        roomList.get(3-1).setEastRoom(roomList.get(2-1));
 
 
-        List<Pathway> room4Pathways = new ArrayList<>();
-        room4Pathways.add(path41);
-        roomList.get(4-1).setPathwayList(room4Pathways);
+        roomList.get(4-1).setNorthRoom(roomList.get(1-1));
 
-        List<Pathway> room5Pathways = new ArrayList<>();
-        room5Pathways.add(path52);
-        room5Pathways.add(path56);
-        room5Pathways.add(path58);
-        roomList.get(5-1).setPathwayList(room5Pathways);
-
-        List<Pathway> room6Pathways = new ArrayList<>();
-        room6Pathways.add(path69);
-        room6Pathways.add(path65);
-        roomList.get(6-1).setPathwayList(room6Pathways);
-
-        List<Pathway> room7Pathways = new ArrayList<>();
-        room7Pathways.add(path78);
-        roomList.get(7-1).setPathwayList(room7Pathways);
-
-        List<Pathway> room8Pathways = new ArrayList<>();
-        room8Pathways.add(path85);
-        room8Pathways.add(path87);
-        roomList.get(8-1).setPathwayList(room8Pathways);
-
-        List<Pathway> room9Pathways = new ArrayList<>();
-        room9Pathways.add(path96);
-        roomList.get(9-1).setPathwayList(room9Pathways);
-
-        Hero hero = new Hero(enterHeroName(), true, new ArrayList<>());
-
-        roomList.get(1-1).getCharacterList().add(hero);
+        roomList.get(5-1).setNorthRoom(roomList.get(2-1));
+        roomList.get(5-1).setWestRoom(roomList.get(6-1));
+        roomList.get(5-1).setSouthRoom(roomList.get(8-1));
 
 
-        characterList.add(medusa);
-        characterList.add(hero);
-        characterList.add(mrDracula);
-        characterList.add(princess);
+        roomList.get(6-1).setEastRoom(roomList.get(5-1));
+        roomList.get(6-1).setSouthRoom(roomList.get(9-1));
 
+        roomList.get(7-1).setWestRoom(roomList.get(8-1));
 
-        return new Game(roomList, characterList, itemList);
+        roomList.get(8-1).setNorthRoom(roomList.get(5-1));
+
+        roomList.get(9-1).setNorthRoom(roomList.get(6-1));
+
+        Monster medusa = new Monster("Medusa", true, roomList.get(6-1), "congelamento", WeaponEnum.MAGIC_SHIELD );
+        Monster mrDracula = new Monster("Dracula", true,roomList.get(5-1),  "succhiasangue", WeaponEnum.SILVER_DUGGER);
+
+        Princess princess = new Princess("Gabriella", true, roomList.get(9-1),  false);
+
+        Hero hero = new Hero(enterHeroName(), true, roomList.get(1-1), new ArrayList<>());
+
+        monsterList.add(medusa);
+        monsterList.add(mrDracula);
+
+        return new Game(roomList, monsterList, itemList, hero, princess);
 
     }
 
