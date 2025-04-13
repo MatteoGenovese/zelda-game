@@ -12,4 +12,37 @@ public abstract class Item {
         this.description = description;
         this.isSellable = isSellable;
     }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", isSellable=" + isSellable +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Boolean getSellable() {
+        return isSellable;
+    }
+
+    public void setSellable(Boolean sellable) {
+        isSellable = sellable;
+    }
 }

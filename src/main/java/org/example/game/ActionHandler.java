@@ -57,6 +57,7 @@ public class ActionHandler {
                         System.out.println("You choose: " + action.getFirst().toUpperCase());
                         yield true;
                     }
+
                     case "look"-> {
                         LookHandler lookHandler = LookHandler.getInstance();
                         lookHandler.lookAround(game);

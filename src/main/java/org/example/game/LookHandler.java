@@ -2,6 +2,7 @@ package org.example.game;
 
 import org.example.characters.Hero;
 import org.example.rooms.Room;
+import org.example.utils.MessageUtility;
 
 import java.util.Scanner;
 
@@ -30,7 +31,9 @@ public class LookHandler {
         Hero hero = game.getHero();
         Room currentRoom = hero.getRoom();
 
-        System.out.println(currentRoom.getItem());
+        MessageUtility.printItems(currentRoom);
+        MessageUtility.printMonster(currentRoom, game);
+        MessageUtility.printAvailableRooms(currentRoom);
 
         System.out.println(hero);
         return game;
