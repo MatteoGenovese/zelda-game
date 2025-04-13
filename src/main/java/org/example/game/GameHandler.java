@@ -117,10 +117,8 @@ public class GameHandler {
         roomList.get(8-1).setItem(pieceOfPaper);
 
 
-
         roomList.get(1-1).setWestRoom(roomList.get(2-1));
         roomList.get(1-1).setSouthRoom(roomList.get(4-1));
-
 
         roomList.get(2-1).setEastRoom(roomList.get(1-1));
         roomList.get(2-1).setWestRoom(roomList.get(3-1));
@@ -128,13 +126,11 @@ public class GameHandler {
 
         roomList.get(3-1).setEastRoom(roomList.get(2-1));
 
-
         roomList.get(4-1).setNorthRoom(roomList.get(1-1));
 
         roomList.get(5-1).setNorthRoom(roomList.get(2-1));
         roomList.get(5-1).setWestRoom(roomList.get(6-1));
         roomList.get(5-1).setSouthRoom(roomList.get(8-1));
-
 
         roomList.get(6-1).setEastRoom(roomList.get(5-1));
         roomList.get(6-1).setSouthRoom(roomList.get(9-1));

@@ -58,8 +58,8 @@ public class ActionHandler {
                         yield true;
                     }
                     case "look"-> {
-                        MoveHandler moveHandler = MoveHandler.getInstance();
-                        moveHandler.moveHero(game, action.getLast());
+                        LookHandler lookHandler = LookHandler.getInstance();
+                        lookHandler.lookAround(game);
                         yield true;
                     }
                     case "move"-> {

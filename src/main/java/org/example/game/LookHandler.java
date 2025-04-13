@@ -26,10 +26,11 @@ public class LookHandler {
     }
 
 
-    public Game lookAround(Game game, String direction){
+    public Game lookAround(Game game){
         Hero hero = game.getHero();
         Room currentRoom = hero.getRoom();
 
+        System.out.println(currentRoom.getItem());
 
         System.out.println(hero);
         return game;
