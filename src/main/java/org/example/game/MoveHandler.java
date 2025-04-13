@@ -32,27 +32,39 @@ public class MoveHandler {
         try {
             switch (direction) {
                 case "north" -> {
-                    if ( currentRoom.getNorthRoom().toString() != null) {
+                    if ( currentRoom.getNorthRoom().toString() != null &&
+                            !currentRoom.getNorthRoom().getHasToBeOpenedFromOutside()) {
                         hero.setRoom(currentRoom.getNorthRoom());
                         movingMessage(direction);
+                    }else {
+                        signalRoomClosed(direction, currentRoom.getNorthRoom().getNumber().toString());
                     }
                 }
                 case "east" -> {
-                    if ( currentRoom.getEastRoom().toString() != null){
+                    if ( currentRoom.getEastRoom().toString() != null &&
+                    !currentRoom.getEastRoom().getHasToBeOpenedFromOutside()) {
                         hero.setRoom(currentRoom.getEastRoom());
                         movingMessage(direction);
+                    }else {
+                        signalRoomClosed(direction, currentRoom.getEastRoom().getNumber().toString());
                     }
                 }
                 case "west" -> {
-                    if ( currentRoom.getWestRoom().toString() != null){
+                    if ( currentRoom.getWestRoom().toString() != null &&
+                    !currentRoom.getWestRoom().getHasToBeOpenedFromOutside()) {
                         hero.setRoom(currentRoom.getWestRoom());
                         movingMessage(direction);
+                    }else {
+                        signalRoomClosed(direction, currentRoom.getWestRoom().getNumber().toString());
                     }
                 }
                 case "south" -> {
-                    if ( currentRoom.getSouthRoom().toString() != null){
+                    if ( currentRoom.getSouthRoom().toString() != null &&
+                    !currentRoom.getSouthRoom().getHasToBeOpenedFromOutside()) {
                         hero.setRoom(currentRoom.getSouthRoom());
                         movingMessage(direction);
+                    }else {
+                        signalRoomClosed(direction, currentRoom.getSouthRoom().getNumber().toString());
                     }
                 }
                 default -> {
@@ -70,6 +82,12 @@ public class MoveHandler {
 
         System.out.println(hero);
         return game;
+    }
+
+    private static void signalRoomClosed(String direction, String currentRoomNumber) {
+        System.out.println(direction +" is not available because room"+
+                currentRoomNumber+
+                " is closed");
     }
 
     private static void movingMessage(String direction) {

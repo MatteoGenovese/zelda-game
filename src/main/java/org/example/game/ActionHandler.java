@@ -53,8 +53,13 @@ public class ActionHandler {
                 }
 
                 gameOn = switch (action.getFirst()) {
-                    case "pick", "drop", "exit", "attack", "look" -> {
+                    case "pick", "drop", "exit", "attack"-> {
                         System.out.println("You choose: " + action.getFirst().toUpperCase());
+                        yield true;
+                    }
+                    case "look"-> {
+                        MoveHandler moveHandler = MoveHandler.getInstance();
+                        moveHandler.moveHero(game, action.getLast());
                         yield true;
                     }
                     case "move"-> {
