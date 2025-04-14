@@ -16,13 +16,14 @@ public class Bag <T extends Item>{
     }
 
     public void removeItem(T itemToRemove){
-        int index = 0;
+        T itemToRemove3 = null;
         for (T item : items){
             if (item.getName().equals(itemToRemove.getName())){
-                items.remove(index);
+                itemToRemove3 = item;
+
             }
-            index++;
         }
+        items.remove(itemToRemove3);
     }
 
     @Override

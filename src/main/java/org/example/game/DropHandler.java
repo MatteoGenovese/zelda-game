@@ -3,29 +3,26 @@ package org.example.game;
 import org.example.characters.Hero;
 import org.example.enums.TreasureEnum;
 import org.example.enums.WeaponEnum;
-import org.example.items.Item;
+import org.example.items.Bag;
 import org.example.items.Treasure;
 import org.example.items.Weapon;
 import org.example.rooms.Room;
 import org.example.utils.MessageUtility;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Scanner;
 
-public class PickHandler {
+public class DropHandler {
 
 
 
-    private static PickHandler instance = null;
+    private static DropHandler instance = null;
     private Scanner scanner;
 
-    private PickHandler(){}
+    private DropHandler(){}
 
-    public static PickHandler getInstance(){
+    public static DropHandler getInstance(){
         if(instance == null){
-            instance = new PickHandler();
+            instance = new DropHandler();
         }
         return instance;
     }
@@ -35,26 +32,26 @@ public class PickHandler {
     }
 
 
-    public void pickItem(Game game, String item){
+    public void dropItem(Game game, String item){
         Hero hero = game.getHero();
         Room currentRoom = hero.getRoom();
 
         try {
             switch (item) {
                 case "shield" -> {
-                    removeWeaponAndInsertItInHeroBag(currentRoom, WeaponEnum.MAGIC_SHIELD.getName(), hero);
+                    dropWeaponFromBag(currentRoom, WeaponEnum.MAGIC_SHIELD.getName(), hero);
                 }
                 case "dagger" -> {
-                    removeWeaponAndInsertItInHeroBag(currentRoom, WeaponEnum.SILVER_DAGGER.getName(), hero);
+                    dropWeaponFromBag(currentRoom, WeaponEnum.SILVER_DAGGER.getName(), hero);
                 }
                 case "chalice" -> {
-                    removeTreasureAndInsertItInHeroBag(currentRoom, TreasureEnum.GOLDEN_CHALICE.getName(), hero);
+                    dropTreasureFromBag(currentRoom, TreasureEnum.GOLDEN_CHALICE.getName(), hero);
                 }
                 case "egg" -> {
-                    removeTreasureAndInsertItInHeroBag(currentRoom, TreasureEnum.GOLDEN_EGG.getName(), hero);
+                    dropTreasureFromBag(currentRoom, TreasureEnum.GOLDEN_EGG.getName(), hero);
                 }
                 case "paper" -> {
-                    removeTreasureAndInsertItInHeroBag(currentRoom, TreasureEnum.PIECE_OF_PAPER.getName(), hero);
+                    dropTreasureFromBag(currentRoom, TreasureEnum.PIECE_OF_PAPER.getName(), hero);
                 }
                 default -> {
                     System.out.println("Not a valid item: " + item);
@@ -68,26 +65,28 @@ public class PickHandler {
         }
     }
 
-    private static void removeWeaponAndInsertItInHeroBag(Room currentRoom, String weaponName, Hero hero) {
+    private static void dropWeaponFromBag(Room currentRoom, String weaponName, Hero hero) {
         Weapon weaponToRemove = null;
-        for (Weapon weapon: currentRoom.getWeaponList()){
+        Bag<Weapon> weaponBag = hero.getWeaponBag();
+        for (Weapon weapon: weaponBag.getItems()){
             if (weapon.getName().equals(weaponName)){
                 weaponToRemove = weapon;
             }
         }
-        currentRoom.getWeaponList().remove(weaponToRemove);
-        hero.addWeaponInBag(weaponToRemove);
+        hero.dropWeaponFromBag(weaponToRemove);
+        currentRoom.getWeaponList().add(weaponToRemove);
     }
 
-    private static void removeTreasureAndInsertItInHeroBag(Room currentRoom, String treasureName, Hero hero) {
+    private static void dropTreasureFromBag(Room currentRoom, String treasureName, Hero hero) {
         Treasure treasureToRemove = null;
-        for (Treasure treasure: currentRoom.getTreasureList()){
+        Bag<Treasure> treasureBag = hero.getTreasureBag();
+        for (Treasure treasure: treasureBag.getItems()){
             if (treasure.getName().equals(treasureName)){
                 treasureToRemove = treasure;
             }
         }
-        currentRoom.getTreasureList().remove(treasureToRemove);
-        hero.addTreasureInBag(treasureToRemove);
+        hero.dropTreasureFromBag(treasureToRemove);
+        currentRoom.getTreasureList().add(treasureToRemove);
     }
 
 }

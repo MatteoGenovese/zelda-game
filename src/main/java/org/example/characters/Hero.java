@@ -39,6 +39,14 @@ public class Hero extends Character {
         treasureBag.addItem(treasure);
     }
 
+    public void dropWeaponFromBag(Weapon weapon) {
+        weaponBag.removeItem(weapon);
+    }
+
+    public void dropTreasureFromBag(Treasure treasure) {
+        treasureBag.removeItem(treasure);
+    }
+
     public void addWeaponInBag(Weapon weapon) {
         weaponBag.addItem(weapon);
     }
