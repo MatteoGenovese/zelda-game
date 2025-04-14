@@ -37,7 +37,7 @@ public class PickHandler {
 
     public void pickItem(Game game, String item){
         Hero hero = game.getHero();
-        Room currentRoom = hero.getRoom();
+        Room currentRoom = hero.getCurrentRoom();
 
         try {
             switch (item) {

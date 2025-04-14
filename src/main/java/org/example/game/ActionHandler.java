@@ -37,7 +37,7 @@ public class ActionHandler {
 
         while (gameOn) {
             try {
-                System.out.println("Insert the action (MOVE, PICK, DROP, EXIT, ATTACK, LOOK or QUIT to left the game):");
+                System.out.println("Insert the action (MOVE, PICK, DROP, LOOK, ATTACK, or EXIT to left the game):");
 
                 if (!scanner.hasNextLine()) {
                     System.out.println("No line found");
@@ -53,9 +53,9 @@ public class ActionHandler {
                 }
 
                 gameOn = switch (action.getFirst()) {
-                    case "exit", "attack"-> {
-                        System.out.println("You choose: " + action.getFirst().toUpperCase());
-                        yield true;
+                    case "attack"-> {
+                        AttackHandler attackHandler = AttackHandler.getInstance();
+                        yield attackHandler.attackMonster(game, action.getLast());
                     }
                     case "drop"-> {
                         DropHandler dropHandler = DropHandler.getInstance();
@@ -77,8 +77,9 @@ public class ActionHandler {
                         moveHandler.moveHero(game, action.getLast());
                         yield true;
                     }
-                    case "quit" -> {
-                        System.out.println("You quit the game: " + action.getFirst().toUpperCase());
+                    case "exit" -> {
+                        ExitHandler exitHandler = ExitHandler.getInstance();
+                        exitHandler.quitTheGame(game);
                         yield false;
                     }
                     default -> {
@@ -90,11 +91,7 @@ public class ActionHandler {
                 System.out.println("Error: " + e.getMessage());
                 return true;
             }
-
         }
-
         return gameOn;
     }
-
-
 }

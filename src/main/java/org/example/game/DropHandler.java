@@ -34,7 +34,7 @@ public class DropHandler {
 
     public void dropItem(Game game, String item){
         Hero hero = game.getHero();
-        Room currentRoom = hero.getRoom();
+        Room currentRoom = hero.getCurrentRoom();
 
         try {
             switch (item) {

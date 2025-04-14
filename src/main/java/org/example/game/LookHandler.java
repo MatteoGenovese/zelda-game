@@ -29,11 +29,13 @@ public class LookHandler {
 
     public void lookAround(Game game){
         Hero hero = game.getHero();
-        Room currentRoom = hero.getRoom();
+        Room currentRoom = hero.getCurrentRoom();
 
         MessageUtility.printItems(currentRoom);
-        MessageUtility.printMonster(currentRoom, game);
+        MessageUtility.printMonster(currentRoom);
+        MessageUtility.printPrincess(currentRoom);
         MessageUtility.printAvailableRooms(currentRoom);
+        MessageUtility.printHeroCurrentRoom(currentRoom);
 
         System.out.println(hero);
     }

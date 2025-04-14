@@ -9,6 +9,7 @@ import org.example.enums.WeaponEnum;
 import org.example.items.Treasure;
 import org.example.items.Weapon;
 import org.example.rooms.Room;
+import org.example.utils.FileReader;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -51,26 +52,11 @@ public class GameHandler {
         }
     }
 
-    private static void readStartFile() {
-        InputStream input = Main.class.getClassLoader().getResourceAsStream("Start.txt");
-        if (input == null) {
-            System.out.println("File not found");
-            return;
-        }
-
-        try (Scanner myReader = new Scanner(input)) {
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                System.out.println(data);
-            }
-        } catch (Exception e) {
-            System.out.println("An error occurred while reading the file.");
-            e.printStackTrace();
-        }
-    }
 
 
     public Game prepareNewGame() {
+
+        FileReader.readFile("Start");
 
         List<Room> roomList = new ArrayList<>();
         List<Monster> monsterList  = new ArrayList<>();
@@ -128,20 +114,23 @@ public class GameHandler {
         roomList.get(7-1).setWestRoom(roomList.get(8-1));
 
         roomList.get(8-1).setNorthRoom(roomList.get(5-1));
+        roomList.get(8-1).setEastRoom(roomList.get(7-1));
 
         roomList.get(9-1).setNorthRoom(roomList.get(6-1));
 
-        Monster medusa = new Monster("Medusa", true, roomList.get(6-1), "congelamento", WeaponEnum.MAGIC_SHIELD );
-        Monster mrDracula = new Monster("Dracula", true,roomList.get(5-1),  "succhiasangue", WeaponEnum.SILVER_DAGGER);
+        Monster medusa = new Monster("Medusa", true, WeaponEnum.MAGIC_SHIELD, "congelamento", roomList.get(8-1));
+        Monster mrDracula = new Monster("Dracula", true, WeaponEnum.SILVER_DAGGER, "succhiasangue", roomList.get(9-1));
 
-        Princess princess = new Princess("Gabriella", true, roomList.get(9-1),  false);
+        Princess princess = new Princess("Gabriella", true, false);
+
+
+        roomList.get(5-1).setMonster(medusa);
+        roomList.get(6-1).setMonster(mrDracula);
+        roomList.get(9-1).setPrincess(princess);
 
         Hero hero = new Hero(enterHeroName(), true, roomList.get(1-1));
 
-        monsterList.add(medusa);
-        monsterList.add(mrDracula);
-
-        return new Game(roomList, monsterList, hero, princess);
+        return new Game(roomList, hero);
 
     }
 

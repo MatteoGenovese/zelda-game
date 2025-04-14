@@ -1,22 +1,20 @@
 package org.example.characters;
 
 import org.example.items.Bag;
-import org.example.items.Item;
 import org.example.items.Treasure;
 import org.example.items.Weapon;
 import org.example.rooms.Room;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Hero extends Character {
 
+    Room currentRoom;
     //can contain max 10 items
     private Bag<Weapon> weaponBag = new Bag<>();
     private Bag<Treasure> treasureBag = new Bag<>();
 
-    public Hero(String name, Boolean isLiving, Room room) {
-        super(name, isLiving, room);
+    public Hero(String name, Boolean isLiving, Room currentRoom) {
+        super(name, isLiving);
+        this.currentRoom = currentRoom;
     }
 
     public Bag<Weapon> getWeaponBag() {
@@ -53,6 +51,14 @@ public class Hero extends Character {
 
     public boolean checkBagDimension() {
         return weaponBag.getItems().size() + treasureBag.getItems().size() <= 10;
+    }
+
+    public Room getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(Room currentRoom) {
+        this.currentRoom = currentRoom;
     }
 
     @Override

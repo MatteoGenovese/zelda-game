@@ -1,36 +1,39 @@
 package org.example.utils;
 
-import org.example.characters.Monster;
-import org.example.game.Game;
 import org.example.rooms.Room;
-
-import java.util.Objects;
 
 public class MessageUtility {
 
 
-    public static void printMonster(Room room, Game game) {
+    public static void printMonster(Room room) {
         String monsterInsideRoom = "";
-        for (Monster monster : game.getMonsterList()){
-            if (Objects.equals(monster.getRoom().getNumber(), room.getNumber())){
-                monsterInsideRoom = monster.getName()+" is inside the room";
-            }
+        if (room.getMonster() != null && room.getMonster().getLiving()){
+            monsterInsideRoom = room.getMonster().getName()+" is inside the room and is living";
         }
+        if (room.getMonster() != null && !room.getMonster().getLiving()){
+            monsterInsideRoom = room.getMonster().getName()+" is inside the room dead on the floor";
+        }
+
         if (monsterInsideRoom.isBlank()){
-            monsterInsideRoom = "no monster detected";
+            monsterInsideRoom = "No monster detected";
         }
         System.out.println(monsterInsideRoom);
     }
 
-
-    public static void printPrincess(Room room, Game game) {
-        String monsterInsideRoom = "";
-        for (Monster monster : game.getMonsterList()){
-            if (Objects.equals(monster.getRoom().getNumber(), room.getNumber())){
-                monsterInsideRoom = monster.getName()+" is inside the room";
-            }
+    public static void printPrincess(Room room) {
+        String princessInsideRoom = "";
+        if (room.getPrincess() != null){
+            princessInsideRoom = room.getPrincess().getName()+" is inside the room";
         }
-        System.out.println(monsterInsideRoom);
+        if (princessInsideRoom.isBlank()){
+            princessInsideRoom = "No princess detected";
+        }
+        System.out.println(princessInsideRoom);
+    }
+
+
+    public static void printHeroCurrentRoom(Room room) {
+        System.out.println(room);
     }
 
     public static void printAvailableRooms(Room room) {

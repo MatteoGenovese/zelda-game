@@ -1,6 +1,7 @@
 package org.example.game;
 
 import org.example.characters.Hero;
+import org.example.characters.Princess;
 import org.example.rooms.Room;
 import org.example.utils.MessageUtility;
 
@@ -25,47 +26,25 @@ public class MoveHandler {
     }
 
 
-    public Game moveHero(Game game, String direction){
+    public void moveHero(Game game, String direction){
         Hero hero = game.getHero();
-        Room currentRoom = hero.getRoom();
-
         try {
             switch (direction) {
                 case "north" -> {
-                    if ( currentRoom.getNorthRoom().toString() != null &&
-                            !currentRoom.getNorthRoom().getHasToBeOpenedFromOutside()) {
-                        hero.setRoom(currentRoom.getNorthRoom());
-                        MessageUtility.printMoveAndAvailableRooms(direction, currentRoom.getNorthRoom());
-                    }else {
-                        MessageUtility.signalRoomClosed(direction, currentRoom.getNorthRoom().getNumber().toString());
-                    }
+                    goToRoom(direction, hero.getCurrentRoom().getNorthRoom(), hero);
+                    checkIfPrincessIsPresent(hero.getCurrentRoom());
                 }
                 case "east" -> {
-                    if ( currentRoom.getEastRoom().toString() != null &&
-                    !currentRoom.getEastRoom().getHasToBeOpenedFromOutside()) {
-                        hero.setRoom(currentRoom.getEastRoom());
-                        MessageUtility.printMoveAndAvailableRooms(direction, currentRoom.getEastRoom());
-                    }else {
-                        MessageUtility.signalRoomClosed(direction, currentRoom.getEastRoom().getNumber().toString());
-                    }
+                    goToRoom(direction, hero.getCurrentRoom().getEastRoom(), hero);
+                    checkIfPrincessIsPresent(hero.getCurrentRoom());
                 }
                 case "west" -> {
-                    if ( currentRoom.getWestRoom().toString() != null &&
-                    !currentRoom.getWestRoom().getHasToBeOpenedFromOutside()) {
-                        hero.setRoom(currentRoom.getWestRoom());
-                        MessageUtility.printMoveAndAvailableRooms(direction, currentRoom.getWestRoom());
-                    }else {
-                        MessageUtility.signalRoomClosed(direction, currentRoom.getWestRoom().getNumber().toString());
-                    }
+                    goToRoom(direction, hero.getCurrentRoom().getWestRoom(), hero);
+                    checkIfPrincessIsPresent(hero.getCurrentRoom());
                 }
                 case "south" -> {
-                    if ( currentRoom.getSouthRoom().toString() != null &&
-                    !currentRoom.getSouthRoom().getHasToBeOpenedFromOutside()) {
-                        hero.setRoom(currentRoom.getSouthRoom());
-                        MessageUtility.printMoveAndAvailableRooms(direction, currentRoom.getSouthRoom());
-                    }else {
-                        MessageUtility.signalRoomClosed(direction, currentRoom.getSouthRoom().getNumber().toString());
-                    }
+                    goToRoom(direction, hero.getCurrentRoom().getSouthRoom(), hero);
+                    checkIfPrincessIsPresent(hero.getCurrentRoom());
                 }
                 default -> {
                     System.out.println("Not a valid direction: " + direction);
@@ -81,8 +60,21 @@ public class MoveHandler {
         }
 
         System.out.println(hero);
-        return game;
     }
 
+    private static void goToRoom(String direction, Room roomToGo, Hero hero) {
+        if ( roomToGo.toString() != null &&
+                !roomToGo.getHasToBeOpenedFromOutside()) {
+            hero.setCurrentRoom(roomToGo);
+            MessageUtility.printMoveAndAvailableRooms(direction, roomToGo);
+        }else {
+            MessageUtility.signalRoomClosed(direction, roomToGo.getNumber().toString());
+        }
+    }
 
+    private static void checkIfPrincessIsPresent(Room room) {
+        if (room.getPrincess() != null){
+            room.getPrincess().setWithTheHero(true);
+        }
+    }
 }

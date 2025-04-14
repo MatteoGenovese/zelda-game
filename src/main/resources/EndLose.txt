@@ -1,0 +1,5 @@
+                                     ########################
+                                     #  You quit the game   #
+                                     ########################
+
+You didn't find the princess before you quit the game

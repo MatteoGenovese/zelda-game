@@ -1,9 +1,12 @@
 package org.example.rooms;
 
+import org.example.characters.Monster;
+import org.example.characters.Princess;
 import org.example.items.Treasure;
 import org.example.items.Weapon;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Room {
     private Integer number;
@@ -16,6 +19,8 @@ public class Room {
     private Room westRoom;
 
     //optionals
+    private Monster monster;
+    private Princess princess;
     private List<Weapon> weaponList = new ArrayList<>();
     private List<Treasure> treasureList = new ArrayList<>();
 
@@ -24,6 +29,22 @@ public class Room {
         this.description = description;
         this.hasExit = hasExit;
         this.hasToBeOpenedFromOutside = hasToBeOpenedFromOutside;
+    }
+
+    public Monster getMonster() {
+        return monster;
+    }
+
+    public void setMonster(Monster monster) {
+        this.monster = monster;
+    }
+
+    public Princess getPrincess() {
+        return princess;
+    }
+
+    public void setPrincess(Princess princess) {
+        this.princess = princess;
     }
 
     public List<Weapon> getWeaponList() {

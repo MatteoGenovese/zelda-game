@@ -1,12 +1,18 @@
 package org.example.characters;
 
-import org.example.rooms.Room;
-
 public class Princess extends Character {
     private Boolean isWithTheHero;
 
-    public Princess(String name, Boolean isLiving, Room withinRoom, Boolean isWithTheHero) {
-        super(name, isLiving, withinRoom);
+    public Princess(String name, Boolean isLiving, Boolean isWithTheHero) {
+        super(name, isLiving);
         this.isWithTheHero = isWithTheHero;
+    }
+
+    public Boolean getWithTheHero() {
+        return isWithTheHero;
+    }
+
+    public void setWithTheHero(Boolean withTheHero) {
+        isWithTheHero = withTheHero;
     }
 }
