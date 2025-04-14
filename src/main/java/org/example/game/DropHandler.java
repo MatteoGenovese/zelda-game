@@ -57,8 +57,6 @@ public class DropHandler {
                     System.out.println("Not a valid item: " + item);
                 }
             };
-        } catch (NullPointerException e){
-            System.out.println("It is not possible to pick, it is not here: "+ item);
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();

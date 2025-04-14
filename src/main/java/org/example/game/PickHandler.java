@@ -75,8 +75,12 @@ public class PickHandler {
                 weaponToRemove = weapon;
             }
         }
-        currentRoom.getWeaponList().remove(weaponToRemove);
-        hero.addWeaponInBag(weaponToRemove);
+        if ( weaponToRemove != null){
+            currentRoom.getWeaponList().remove(weaponToRemove);
+            hero.addWeaponInBag(weaponToRemove);
+        } else {
+            System.out.println(weaponToRemove+" not found in "+currentRoom);
+        }
     }
 
     private static void removeTreasureAndInsertItInHeroBag(Room currentRoom, String treasureName, Hero hero) {
@@ -86,8 +90,12 @@ public class PickHandler {
                 treasureToRemove = treasure;
             }
         }
-        currentRoom.getTreasureList().remove(treasureToRemove);
-        hero.addTreasureInBag(treasureToRemove);
+        if ( treasureToRemove != null){
+            currentRoom.getTreasureList().remove(treasureToRemove);
+            hero.addTreasureInBag(treasureToRemove);
+        } else {
+            System.out.println(treasureName+" not found in "+currentRoom);
+        }
     }
 
 }

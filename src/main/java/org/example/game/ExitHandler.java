@@ -37,8 +37,6 @@ public class ExitHandler {
 
         try {
             displayEnd(hero);
-        } catch (NullPointerException e){
-            System.out.println("cannot attack:");
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
