@@ -11,4 +11,13 @@ public class Treasure extends Item {
         super(name, description, isSellable);
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return "Treasure{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", isSellable=" + isSellable +
+                '}';
+    }
 }

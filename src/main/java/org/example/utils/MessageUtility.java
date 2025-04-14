@@ -17,7 +17,7 @@ public class MessageUtility {
             }
         }
         if (monsterInsideRoom.isBlank()){
-            monsterInsideRoom = "no moster detected";
+            monsterInsideRoom = "no monster detected";
         }
         System.out.println(monsterInsideRoom);
     }
@@ -63,6 +63,7 @@ public class MessageUtility {
     }
 
     public static void printItems(Room room) {
-        System.out.println(room.getItem()!=null? room.getItem(): "No items in this room");
+        System.out.println(room.getTreasureList().isEmpty() ? "No Treasure in this room": room.getTreasureList() );
+        System.out.println(room.getWeaponList().isEmpty() ? "No Weapon in this room": room.getWeaponList());
     }
 }

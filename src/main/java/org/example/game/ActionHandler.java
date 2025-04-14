@@ -53,11 +53,15 @@ public class ActionHandler {
                 }
 
                 gameOn = switch (action.getFirst()) {
-                    case "pick", "drop", "exit", "attack"-> {
+                    case "drop", "exit", "attack"-> {
                         System.out.println("You choose: " + action.getFirst().toUpperCase());
                         yield true;
                     }
-
+                    case "pick"-> {
+                        PickHandler pickHandler = PickHandler.getInstance();
+                        pickHandler.pickItem(game, action.getLast());
+                        yield true;
+                    }
                     case "look"-> {
                         LookHandler lookHandler = LookHandler.getInstance();
                         lookHandler.lookAround(game);

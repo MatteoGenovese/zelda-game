@@ -1,8 +1,7 @@
 package org.example.rooms;
 
-import org.example.characters.Character;
-import org.example.characters.Monster;
-import org.example.items.Item;
+import org.example.items.Treasure;
+import org.example.items.Weapon;
 
 import java.util.*;
 
@@ -17,7 +16,8 @@ public class Room {
     private Room westRoom;
 
     //optionals
-    private Item item;
+    private List<Weapon> weaponList = new ArrayList<>();
+    private List<Treasure> treasureList = new ArrayList<>();
 
     public Room(Integer number, String description, Boolean hasExit, Boolean hasToBeOpenedFromOutside) {
         this.number = number;
@@ -26,17 +26,21 @@ public class Room {
         this.hasToBeOpenedFromOutside = hasToBeOpenedFromOutside;
     }
 
-    public Item getItem() {
-        return item;
+    public List<Weapon> getWeaponList() {
+        return weaponList;
     }
 
-    public void setItem(Item item) {
-        this.item = item;
+    public void addWeaponInRoom(Weapon weaponList) {
+        this.weaponList.add(weaponList);
     }
 
-    //Currently you are in Room 1. A cool shudder trickles down your spine. Glancing around nervously, you see somber portrait
-    //s staring at you from behind layers of dust, seemingly penetrating your very being. The Exit to Castle is to your West.
+    public List<Treasure> getTreasureList() {
+        return treasureList;
+    }
 
+    public void addTreasure(Treasure treasureList) {
+        this.treasureList.add(treasureList);
+    }
 
     public Integer getNumber() {
         return number;

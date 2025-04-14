@@ -11,4 +11,13 @@ public class Weapon extends Item {
         super(name, description, isSellable);
         this.actionDone = actionDone;
     }
+
+    @Override
+    public String toString() {
+        return "Weapon{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", isSellable=" + isSellable +
+                '}';
+    }
 }

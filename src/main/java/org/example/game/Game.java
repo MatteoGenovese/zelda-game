@@ -4,6 +4,8 @@ import org.example.characters.Hero;
 import org.example.characters.Monster;
 import org.example.characters.Princess;
 import org.example.items.Item;
+import org.example.items.Treasure;
+import org.example.items.Weapon;
 import org.example.rooms.Room;
 
 import java.util.List;
@@ -11,14 +13,12 @@ import java.util.List;
 public class Game {
     private List<Room> roomList;
     private List<Monster> monsterList;
-    private List<Item> itemList;
     private Hero hero;
     private Princess princess;
 
-    public Game(List<Room> roomList, List<Monster> monsterList, List<Item> itemList, Hero hero, Princess princess) {
+    public Game(List<Room> roomList, List<Monster> monsterList, Hero hero, Princess princess) {
         this.roomList = roomList;
         this.monsterList = monsterList;
-        this.itemList = itemList;
         this.hero = hero;
         this.princess = princess;
     }
@@ -55,11 +55,4 @@ public class Game {
         this.roomList = roomList;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
 }

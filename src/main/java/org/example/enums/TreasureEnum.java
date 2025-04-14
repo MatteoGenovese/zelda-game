@@ -1,9 +1,9 @@
 package org.example.enums;
 
 public enum TreasureEnum {
-    GOLDEN_EGG("golden egg"),
-    GOLDEN_CHALICE("golden chalice"),
-    PIECE_OF_PAPER("Piece of paper");
+    GOLDEN_EGG("egg"),
+    GOLDEN_CHALICE("chalice"),
+    PIECE_OF_PAPER("paper");
 
     private String name;
 

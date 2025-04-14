@@ -4,10 +4,8 @@ import org.example.Main;
 import org.example.characters.Hero;
 import org.example.characters.Monster;
 import org.example.characters.Princess;
-import org.example.enums.CoordinateEnum;
 import org.example.enums.TreasureEnum;
 import org.example.enums.WeaponEnum;
-import org.example.items.Item;
 import org.example.items.Treasure;
 import org.example.items.Weapon;
 import org.example.rooms.Room;
@@ -78,19 +76,11 @@ public class GameHandler {
         List<Monster> monsterList  = new ArrayList<>();
 
 
-        Item goldenEgg = new Treasure(TreasureEnum.GOLDEN_EGG.getName(), "" ,true,500);
-        Item goldenChalice = new Treasure(TreasureEnum.GOLDEN_CHALICE.getName(), "" ,true,500);
-        Item pieceOfPaper = new Treasure(TreasureEnum.PIECE_OF_PAPER.getName(), "" ,true,1000);
-        Item magicShield = new Weapon(WeaponEnum.MAGIC_SHIELD.getName(), "", false,"specchio riflesso");
-        Item silverDugger = new Weapon(WeaponEnum.SILVER_DUGGER.getName(), "", false,"puntellino");
-
-        List<Item> itemList = new ArrayList<>();
-        itemList.add(goldenEgg);
-        itemList.add(goldenChalice);
-        itemList.add(pieceOfPaper);
-        itemList.add(magicShield);
-        itemList.add(silverDugger);
-
+        Treasure goldenEgg = new Treasure(TreasureEnum.GOLDEN_EGG.getName(), "" ,true,500);
+        Treasure goldenChalice = new Treasure(TreasureEnum.GOLDEN_CHALICE.getName(), "" ,true,500);
+        Treasure pieceOfPaper = new Treasure(TreasureEnum.PIECE_OF_PAPER.getName(), "" ,true,1000);
+        Weapon magicShield = new Weapon(WeaponEnum.MAGIC_SHIELD.getName(), "", false,"specchio riflesso");
+        Weapon silverDagger = new Weapon(WeaponEnum.SILVER_DAGGER.getName(), "", false,"puntellino");
 
         roomList.add(new Room(1, "number 1", true, false));
 
@@ -110,12 +100,12 @@ public class GameHandler {
 
         roomList.add(new Room(9, "number 9", false, true));
 
-        roomList.get(2-1).setItem(goldenEgg);
-        roomList.get(3-1).setItem(magicShield);
-        roomList.get(4-1).setItem(goldenChalice);
-        roomList.get(7-1).setItem(silverDugger);
-        roomList.get(8-1).setItem(pieceOfPaper);
+        roomList.get(2-1).addTreasure(goldenEgg);
+        roomList.get(4-1).addTreasure(goldenChalice);
+        roomList.get(8-1).addTreasure(pieceOfPaper);
 
+        roomList.get(7-1).addWeaponInRoom(silverDagger);
+        roomList.get(3-1).addWeaponInRoom(magicShield);
 
         roomList.get(1-1).setWestRoom(roomList.get(2-1));
         roomList.get(1-1).setSouthRoom(roomList.get(4-1));
@@ -142,16 +132,16 @@ public class GameHandler {
         roomList.get(9-1).setNorthRoom(roomList.get(6-1));
 
         Monster medusa = new Monster("Medusa", true, roomList.get(6-1), "congelamento", WeaponEnum.MAGIC_SHIELD );
-        Monster mrDracula = new Monster("Dracula", true,roomList.get(5-1),  "succhiasangue", WeaponEnum.SILVER_DUGGER);
+        Monster mrDracula = new Monster("Dracula", true,roomList.get(5-1),  "succhiasangue", WeaponEnum.SILVER_DAGGER);
 
         Princess princess = new Princess("Gabriella", true, roomList.get(9-1),  false);
 
-        Hero hero = new Hero(enterHeroName(), true, roomList.get(1-1), new ArrayList<>());
+        Hero hero = new Hero(enterHeroName(), true, roomList.get(1-1));
 
         monsterList.add(medusa);
         monsterList.add(mrDracula);
 
-        return new Game(roomList, monsterList, itemList, hero, princess);
+        return new Game(roomList, monsterList, hero, princess);
 
     }
 

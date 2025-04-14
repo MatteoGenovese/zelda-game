@@ -27,7 +27,7 @@ public class LookHandler {
     }
 
 
-    public Game lookAround(Game game){
+    public void lookAround(Game game){
         Hero hero = game.getHero();
         Room currentRoom = hero.getRoom();
 
@@ -36,7 +36,6 @@ public class LookHandler {
         MessageUtility.printAvailableRooms(currentRoom);
 
         System.out.println(hero);
-        return game;
     }
 
 }
